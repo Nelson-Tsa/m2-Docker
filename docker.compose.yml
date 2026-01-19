@@ -1,0 +1,12 @@
+services:
+  nom_de_mon_service:
+    image: nom_de_mon_image
+    container_name: nom_de_mon_contenaire
+    stdin_open: true
+    tty: true
+
+volumes:
+  - ./data:/data-dans-le-conteneur
+  
+
+networks:

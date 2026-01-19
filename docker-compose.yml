@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    container_name: affirmations_api
+    ports:
+      - "8888:8888"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: affirmations
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+    volumes:
+      - .:/app
+    command: node app.js
+
+  db:
+    image: postgres:15-alpine
+    container_name: affirmations_db
+    environment:
+      POSTGRES_DB: affirmations
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
